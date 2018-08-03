@@ -1,0 +1,33 @@
+{
+    "name": "120064921/php_collection_query",
+    "description": "the php collection query class",
+    "type": "project",
+    "keywords": [
+        "collection",
+        "query",
+        "aggregate",
+        "array"
+    ],
+    "homepage": "http://thinkphp.cn/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "120064921",
+            "email": "120064921@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "application"
+        }
+    },
+    "extra": {
+        "think-path": "thinkphp"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
