@@ -10,6 +10,11 @@ class Collections{
 
     public $arrays;
 
+    public function __construct($array=[])
+    {
+        $this->arrays = $array;
+    }
+
     /**
      * 根据指定条件返回数据
      * 传参示例 where($array, ['id'=>1, ['value', '>=', 10]])
@@ -25,9 +30,15 @@ class Collections{
             foreach($condition as $k => $c){
                 if (is_array($c)) {
                     $flag = $this->conditions($item, $c);
+                    if ($flag == 0) {
+                        break;
+                    }
                 }else{
                     if($item[$k] != $c){
                         $flag = 0;
+                        if ($flag == 0) {
+                            break;
+                        }
                     }
                 }
             }
@@ -74,7 +85,8 @@ class Collections{
     {
         $flag = 0;
         switch ($c[1]) {
-            case 'like' || 'LIKE':
+            case 'like':
+            case 'LIKE':
                 if(strstr($item[$c[0]], $c[2])){
                     $flag = 1;
                 }
@@ -89,7 +101,8 @@ class Collections{
                     $flag = 1;
                 }
                 break;
-            case '<>' || '!=':
+            case '<>':
+            case '!=':
                 if($item[$c[0]] != $c[2]){
                     $flag = 1;
                 }
@@ -98,10 +111,14 @@ class Collections{
                 if($item[$c[0]] <= $c[2]){
                     $flag = 1;
                 }
-
                 break;
             case '>=':
                 if($item[$c[0]] >= $c[2]){
+                    $flag = 1;
+                }
+                break;
+            case '=':
+                if($item[$c[0]] == $c[2]){
                     $flag = 1;
                 }
                 break;
@@ -246,5 +263,45 @@ class Collections{
         }
 
         return $this;
+    }
+
+    /**
+     * 对关联数据进行自定义排序
+     * @param array $sortArray
+     * @param $sortColumn
+     * @return array
+     */
+    public function sortByKey(array $sortArray, $sortColumn)
+    {
+        $newArr = [];
+        foreach ($sortArray as $sortKey) {
+            foreach ($this->arrays as $item) {
+                if ($item[$sortColumn] == $sortKey) {
+                    $newArr[] = $item;
+                }
+            }
+        }
+        $this->arrays = $newArr;
+        return $this;
+    }
+
+    /**
+     * 二维数组排序
+     * @param $sort_key
+     * @param int $sort_order
+     * @param int $sort_type
+     * @return array|bool
+     */
+    public function arraySort($sort_key, $sort_order=SORT_DESC, $sort_type=SORT_NUMERIC )
+    {
+        if(!empty($this->arrays)){
+            foreach ($this->arrays as $array){
+                $key_arrays[] = $array[$sort_key];
+            }
+            if(!empty($key_arrays)){
+                array_multisort($key_arrays,$sort_order,$sort_type,$this->arrays);
+            }
+        }
+        return $this->arrays;
     }
 }
