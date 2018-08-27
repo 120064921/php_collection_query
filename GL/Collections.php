@@ -22,9 +22,12 @@ class Collections{
      * @param array $condition
      * @return $this
      */
-    public function where($array=[], $condition=[])
+    public function where($condition=[], $array=[])
     {
         $newArray = [];
+        if(empty($array)){
+            $array = $this->arrays;
+        }
         foreach($array as $item){
             $flag = 1;
             foreach($condition as $k => $c){
@@ -58,12 +61,26 @@ class Collections{
      */
     public function sum($field)
     {
-        $sum = 0;
-        foreach($this->arrays as $item){
-            $sum += $item[$field];
-        }
+        if (is_array($field)){
+            $sum = null;
+            foreach ($field as $field_i) {
+                $sum[$field_i] = 0;
+            }
+            foreach($this->arrays as $item){
+                foreach ($field as $field_i) {
+                    $sum[$field_i] += $item[$field_i];
+                }
+            }
 
-        return $sum;
+            return $sum;
+        }else{
+            $sum = 0;
+            foreach($this->arrays as $item){
+                $sum += $item[$field];
+            }
+
+            return $sum;
+        }
     }
 
     /**
