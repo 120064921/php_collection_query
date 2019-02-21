@@ -321,4 +321,21 @@ class Collections{
         }
         return $this->arrays;
     }
+
+    /**
+     * 多个条件when
+     *
+     * @param $params
+     * @return $this
+     */
+    public function whens($params)
+    {
+        foreach ($params as $param => $value) {
+            $this->when($value, function($query)use($param, $value){
+                return $query->where($this->arrays, [$param => $value]);
+            });
+        }
+
+        return $this;
+    }
 }
