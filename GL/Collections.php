@@ -338,4 +338,39 @@ class Collections{
 
         return $this;
     }
+
+
+    /**
+     * 数组分段 | 将二维数组按指定粒度分段成一个三维数组
+     *
+     * @param array $array 数组
+     * @param int $granularity 粒度数量
+     * @return array
+     */
+    public function array_section($granularity, $array=[])
+    {
+    		if (empty($array)){
+    			$array = $this->arrays;
+    		}
+        $total_num = count($array);
+        if ($total_num < $granularity){
+            $arrs[] = $array;
+        }else{
+            $arrs = [];
+            foreach ($array as $k1 => $v1) {
+                $arr[$k1] = $v1;
+                if ((($k1+1) % $granularity) == 0){
+                    $arrs[] = $arr;
+                    unset($arr);
+                }
+                unset($array[$k1]);
+                if (count($array) == $total_num % $granularity && !empty($array)){
+                    $arrs[] = $array;
+                    break;
+                }
+            }
+        }
+
+        return $arrs;
+    }
 }
