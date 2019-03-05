@@ -339,9 +339,8 @@ class Collections{
         return $this;
     }
 
-
     /**
-     * 数组分段 | 将二维数组按指定粒度分段成一个三维数组
+     * 数组分段 | 把n个元素的二维数组重新拼装成一个每（指定数量）个二维数组为一个元素的三维数组
      *
      * @param array $array 数组
      * @param int $granularity 粒度数量
@@ -349,25 +348,27 @@ class Collections{
      */
     public function array_section($granularity, $array=[])
     {
-    		if (empty($array)){
-    			$array = $this->arrays;
-    		}
+        if (empty($array)){
+            $array = $this->arrays;
+        }
         $total_num = count($array);
-        if ($total_num < $granularity){
+        if ($total_num <= $granularity){
             $arrs[] = $array;
         }else{
             $arrs = [];
-            foreach ($array as $k1 => $v1) {
-                $arr[$k1] = $v1;
-                if ((($k1+1) % $granularity) == 0){
+            $pointer = 0;
+            foreach ($array as $key => $item) {
+                $arr[] = $item;
+                if ((($pointer+1) % $granularity) == 0){
                     $arrs[] = $arr;
                     unset($arr);
                 }
-                unset($array[$k1]);
+                unset($array[$key]);
                 if (count($array) == $total_num % $granularity && !empty($array)){
                     $arrs[] = $array;
                     break;
                 }
+                $pointer ++;
             }
         }
 
