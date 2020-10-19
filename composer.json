@@ -1,7 +1,7 @@
 {
     "name": "lixs/collection",
     "description": "the php collection query class",
-    "type": "project",
+    "type": "library",
     "keywords": [
         "collection",
         "query",
