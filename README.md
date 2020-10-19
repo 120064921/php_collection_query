@@ -4,5 +4,5 @@
 
 ###use
 ```
-    composer require php_collection_query
+    composer require 120064921/php_collection_query
 ```
