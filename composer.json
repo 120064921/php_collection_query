@@ -8,7 +8,7 @@
         "aggregate",
         "array"
     ],
-    "homepage": "http://thinkphp.cn/",
+    "homepage": "https://github.com/120064921/",
     "license": "Apache-2.0",
     "authors": [
         {
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "app\\": "application"
+            "Gl\\": "src"
         }
     },
     "extra": {
