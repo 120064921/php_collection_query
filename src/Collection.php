@@ -1,12 +1,11 @@
 <?php
 
-namespace GL;
+namespace Lixs\Collection;
 
 /**
- * Class Collections 聚合查询 集合类
- * @package GL
+ * 针对数组的聚合查询 工具类
  */
-class Collections{
+class Collection{
 
     public $arrays;
 

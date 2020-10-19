@@ -1,5 +1,5 @@
 {
-    "name": "120064921/php_collection_query",
+    "name": "lixs/collection",
     "description": "the php collection query class",
     "type": "project",
     "keywords": [
@@ -8,11 +8,11 @@
         "aggregate",
         "array"
     ],
-    "homepage": "https://github.com/120064921/",
-    "license": "Apache-2.0",
+    "homepage": "https://github.com/120064921/php_collection_query",
+    "license": "MIT",
     "authors": [
         {
-            "name": "120064921",
+            "name": "lixs",
             "email": "120064921@qq.com"
         }
     ],
@@ -21,11 +21,8 @@
     },
     "autoload": {
         "psr-4": {
-            "GL\\": "src/"
+            "Lixs\\Collection": "src/"
         }
-    },
-    "extra": {
-        "think-path": "thinkphp"
     },
     "config": {
         "preferred-install": "dist"
