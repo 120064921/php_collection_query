@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Lixs\\Collection": "src/"
+            "Lixs\\Collection\\": "src/"
         }
     },
     "config": {
